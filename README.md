@@ -1,6 +1,6 @@
-== Assorted Unity Utilities ==
+## Assorted Unity Utilities
 
-=== Contents ===
+### Contents
 
 * ColorUtil: Utilities for working with the Color object.
 * GameObjectUtils: Utilities for working with GameObjects.
