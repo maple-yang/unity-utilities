@@ -203,9 +203,9 @@ namespace OrbitalGames.UnityUtilities
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="prefab" /> is null</exception>
 		/// <returns>Component of given type attached to the instantiated prefab</returns>
 		/// <remarks>The resulting instance's transform will be set to match the prefab's local-space values</remarks>
-		public static T InstantiateSibling<T>(T prefab, GameObject sibling) where T : MonoBehaviour
+		public static TResult InstantiateSibling<TResult>(TResult prefab, GameObject sibling) where TResult : MonoBehaviour
 		{
-			return InstantiateChild<T>(prefab, sibling != null ? sibling.transform.parent.gameObject : null);
+			return InstantiateChild<TResult>(prefab, sibling != null ? sibling.transform.parent.gameObject : null);
 		}
 	}
 }
