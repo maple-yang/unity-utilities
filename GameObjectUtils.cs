@@ -186,7 +186,7 @@ namespace OrbitalGames.UnityUtilities
 		/// </summary>
 		/// <param name="prefab">Prefab to instantiate</param>
 		/// <param name="parent">Sibling GameObject to whose parent the instance will be attached</param>
-		/// <exception cref="System.ArgumentException">Thrown when paramref name="prefab" /> is null</exception>
+		/// <exception cref="System.ArgumentException">Thrown when <paramref name="prefab" /> is null</exception>
 		/// <returns>Instantiated prefab</returns>
 		/// <remarks>The resulting instance's transform will be set to match the prefab's local-space values</remarks>
 		public static GameObject InstantiateSibling(GameObject prefab, GameObject sibling)
@@ -200,7 +200,7 @@ namespace OrbitalGames.UnityUtilities
 		/// </summary>
 		/// <param name="prefab">Component owned by the prefab to instantiate</param>
 		/// <param name="parent">Sibling GameObject to whose parent the instance will be attached</param>
-		/// <exception cref="System.ArgumentException">Thrown when paramref name="prefab" /> is null</exception>
+		/// <exception cref="System.ArgumentException">Thrown when <paramref name="prefab" /> is null</exception>
 		/// <returns>Component of given type attached to the instantiated prefab</returns>
 		/// <remarks>The resulting instance's transform will be set to match the prefab's local-space values</remarks>
 		public static T InstantiateSibling<T>(T prefab, GameObject sibling) where T : MonoBehaviour
