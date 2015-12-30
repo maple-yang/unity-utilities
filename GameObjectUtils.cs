@@ -207,5 +207,21 @@ namespace OrbitalGames.UnityUtilities
 		{
 			return InstantiateChild<TResult>(prefab, sibling != null ? sibling.transform.parent.gameObject : null);
 		}
+
+		/// <summary>
+		/// Finds a component in the scene attached to an object with the given tag.
+		/// </summary>
+		/// <param name="name">Tag name</param>
+		/// <exception cref="System.ArgumentException">Thrown when <paramref name="name" /> is null or empty</exception>
+		/// <returns>Component of given type attached to the object with the given tag, or null if not found</returns>
+		public static TResult FindWithTag<TResult>(string name) where TResult : MonoBehaviour
+		{
+			if (string.IsNullOrEmpty(name))
+			{
+				throw new ArgumentException("Tag name is invalid", "name");
+			}
+			var obj = GameObject.FindWithTag(name);
+			return obj != null ? obj.GetComponent<TResult>() : null;
+		}
 	}
 }
