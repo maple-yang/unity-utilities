@@ -57,9 +57,9 @@ namespace OrbitalGames.UnityUtilities
 		/// </summary>
 		/// <param name="source">Sequence of GameObjects containing the component type to query</param>
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="source" /> is null</exception>
-		/// <returns>Enumerable sequence of MonoBehaviour instances that were found attached to the GameObjects in <paramref name="source" /></returns>
+		/// <returns>Enumerable sequence of Component instances that were found attached to the GameObjects in <paramref name="source" /></returns>
 		/// <remarks>This method is implemented using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its GetEnumerator method directly or by using foreach.</remarks>
-		public static IEnumerable<TResult> ComponentsIn<TResult>(IEnumerable<GameObject> source) where TResult : MonoBehaviour
+		public static IEnumerable<TResult> ComponentsIn<TResult>(IEnumerable<GameObject> source) where TResult : Component
 		{
 			if (source == null)
 			{
@@ -81,17 +81,17 @@ namespace OrbitalGames.UnityUtilities
 		/// <summary>
 		/// Selects all the GameObject instances that own the components in the given sequence.
 		/// </summary>
-		/// <param name="source">Sequence of MonoBehaviour instances</param>
+		/// <param name="source">Sequence of Component instances</param>
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="source" /> is null</exception>
-		/// <returns>Enumerable sequence of GameObject instances that were found owning the MonoBehaviours in <paramref name="source" /> (duplicates are preserved)</returns>
+		/// <returns>Enumerable sequence of GameObject instances that were found owning the Components in <paramref name="source" /> (duplicates are preserved)</returns>
 		/// <remarks>This method is implemented using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its GetEnumerator method directly or by using foreach.</remarks>
-		public static IEnumerable<GameObject> GameObjectsOf<TSource>(IEnumerable<TSource> source) where TSource : MonoBehaviour
+		public static IEnumerable<GameObject> GameObjectsOf<TSource>(IEnumerable<TSource> source) where TSource : Component
 		{
 			if (source == null)
 			{
 				throw new ArgumentException("source is null", "source");
 			}
-			foreach (MonoBehaviour component in source)
+			foreach (var component in source)
 			{
 				if (component != null)
 				{
@@ -132,9 +132,9 @@ namespace OrbitalGames.UnityUtilities
 		/// <param name="name">Name to give the new instance</param>
 		/// <param name="parent">Parent GameObject to which the instance will be attached</param>
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="name" /> is null</exception>
-		/// <returns>MonoBehaviour instance of the requested type</returns>
+		/// <returns>Component instance of the requested type</returns>
 		/// <remarks>The resulting instance's transform will be set to identity values.</remarks>
-		public static TResult InstantiateNewSingle<TResult>(string name, GameObject parent) where TResult : MonoBehaviour
+		public static TResult InstantiateNewSingle<TResult>(string name, GameObject parent) where TResult : Component
 		{
 			return InstantiateNew(name, parent, typeof(TResult)).GetComponent<TResult>();
 		}
@@ -172,7 +172,7 @@ namespace OrbitalGames.UnityUtilities
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="prefab" /> is null</exception>
 		/// <returns>Component of given type attached to the instantiated prefab</returns>
 		/// <remarks>The resulting instance's transform will be set to match the prefab's local-space values</remarks>
-		public static TResult InstantiateChild<TResult>(TResult prefab, GameObject parent) where TResult : MonoBehaviour
+		public static TResult InstantiateChild<TResult>(TResult prefab, GameObject parent) where TResult : Component
 		{
 			if (prefab == null)
 			{
@@ -203,7 +203,7 @@ namespace OrbitalGames.UnityUtilities
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="prefab" /> is null</exception>
 		/// <returns>Component of given type attached to the instantiated prefab</returns>
 		/// <remarks>The resulting instance's transform will be set to match the prefab's local-space values</remarks>
-		public static TResult InstantiateSibling<TResult>(TResult prefab, GameObject sibling) where TResult : MonoBehaviour
+		public static TResult InstantiateSibling<TResult>(TResult prefab, GameObject sibling) where TResult : Component
 		{
 			return InstantiateChild<TResult>(prefab, sibling != null ? sibling.transform.parent.gameObject : null);
 		}
@@ -214,7 +214,7 @@ namespace OrbitalGames.UnityUtilities
 		/// <param name="name">Tag name</param>
 		/// <exception cref="System.ArgumentException">Thrown when <paramref name="name" /> is null or empty</exception>
 		/// <returns>Component of given type attached to the object with the given tag, or null if not found</returns>
-		public static TResult FindWithTag<TResult>(string name) where TResult : MonoBehaviour
+		public static TResult FindWithTag<TResult>(string name) where TResult : Component
 		{
 			if (string.IsNullOrEmpty(name))
 			{
