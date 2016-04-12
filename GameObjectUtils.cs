@@ -177,9 +177,21 @@ namespace OrbitalGames.UnityUtilities
 			{
 				instance.transform.SetParent(parent.transform, true);
 			}
-			instance.transform.localPosition = prefab.transform.localPosition;
 			instance.transform.localRotation = prefab.transform.localRotation;
 			instance.transform.localScale = prefab.transform.localScale;
+			var asRect = instance.transform as RectTransform;
+			if (asRect != null)
+			{
+				var prefabRect = (prefab.transform as RectTransform);
+				asRect.sizeDelta = prefabRect.sizeDelta;
+				asRect.anchorMin = prefabRect.anchorMin;
+				asRect.anchorMax = prefabRect.anchorMax;
+				asRect.anchoredPosition3D = prefabRect.anchoredPosition3D;
+			}
+			else
+			{
+				instance.transform.localPosition = prefab.transform.localPosition;
+			}
 			return instance;
 		}
 
