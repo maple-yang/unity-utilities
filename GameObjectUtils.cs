@@ -24,6 +24,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace OrbitalGames.UnityUtilities
@@ -49,6 +50,24 @@ namespace OrbitalGames.UnityUtilities
 			for (int i = 0; i < container.transform.childCount; ++i)
 			{
 				yield return container.transform.GetChild(i);
+			}
+		}
+
+		/// <summary>
+		/// Destroys a GameObject's children.
+		/// </summary>
+		/// <param name="container">GameObject whose children are to be destroyed</param>
+		/// <exception cref="System.ArgumentNullException">Thrown when <paramref name="container" /> is null</exception>
+		public static void DestroyChildren(GameObject container, float delay = 0.0f)
+		{
+			if (container == null)
+			{
+				throw new ArgumentNullException("container");
+			}
+			var transform = container.transform;
+			for (int i = container.transform.childCount - 1; i >= 0; --i)
+			{
+				UnityEngine.Object.Destroy(transform.GetChild(i).gameObject, delay);
 			}
 		}
 
