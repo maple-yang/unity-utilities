@@ -22,8 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System.Collections.Generic;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OrbitalGames.UnityUtilities
@@ -36,6 +37,11 @@ namespace OrbitalGames.UnityUtilities
 		private ICollection<IEnumerator> _coroutines;
 		private MonoBehaviour _host;
 		private int _remaining;
+
+		public event EventHandler CoroutineFinished = delegate { };
+
+		/// <summary>Gets the number of remaining coroutines that have not yet finished</summary>
+		public int Remaining { get { return _remaining; } }
 
 		/// <summary>
 		/// Constructor.
@@ -89,6 +95,7 @@ namespace OrbitalGames.UnityUtilities
 		{
 			yield return _host.StartCoroutine(coroutine);
 			--_remaining;
+			CoroutineFinished(this, EventArgs.Empty);
 		}
 	}
 }
