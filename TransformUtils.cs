@@ -152,5 +152,83 @@ namespace OrbitalGames.UnityUtilities
 			transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, value);
 			return transform;
 		}
+
+		/// <summary>
+		/// Sets the X component of the given transform's rotation.
+		/// </summary>
+		/// <param name="transform">Transform to modify</param>
+		/// <param name="value">New X</param>
+		/// <param name="local">Specify true to apply the value in local space</param>
+		/// <returns>Given transform to allow for chaining</returns>
+		public static Transform RotateX(this Transform transform, float value, bool local = false)
+		{
+			if (transform == null)
+			{
+				throw new ArgumentException("transform is null", "transform");
+			}
+			var euler = (local ? transform.localRotation : transform.rotation).eulerAngles;
+			euler.x = value;
+			if (local)
+			{
+				transform.localRotation = Quaternion.Euler(euler);
+			}
+			else
+			{
+				transform.rotation = Quaternion.Euler(euler);
+			}
+			return transform;
+		}
+
+		/// <summary>
+		/// Sets the Y component of the given transform's rotation.
+		/// </summary>
+		/// <param name="transform">Transform to modify</param>
+		/// <param name="value">New Y</param>
+		/// <param name="local">Specify true to apply the value in local space</param>
+		/// <returns>Given transform to allow for chaining</returns>
+		public static Transform RotateY(this Transform transform, float value, bool local = false)
+		{
+			if (transform == null)
+			{
+				throw new ArgumentException("transform is null", "transform");
+			}
+			var euler = (local ? transform.localRotation : transform.rotation).eulerAngles;
+			euler.y = value;
+			if (local)
+			{
+				transform.localRotation = Quaternion.Euler(euler);
+			}
+			else
+			{
+				transform.rotation = Quaternion.Euler(euler);
+			}
+			return transform;
+		}
+
+		/// <summary>
+		/// Sets the Z component of the given transform's rotation.
+		/// </summary>
+		/// <param name="transform">Transform to modify</param>
+		/// <param name="value">New Z</param>
+		/// <param name="local">Specify true to apply the value in local space</param>
+		/// <returns>Given transform to allow for chaining</returns>
+		public static Transform RotateZ(this Transform transform, float value, bool local = false)
+		{
+			if (transform == null)
+			{
+				throw new ArgumentException("transform is null", "transform");
+			}
+			var euler = (local ? transform.localRotation : transform.rotation).eulerAngles;
+			euler.z = value;
+			if (local)
+			{
+				transform.localRotation = Quaternion.Euler(euler);
+			}
+			else
+			{
+				transform.rotation = Quaternion.Euler(euler);
+			}
+			return transform;
+		}
 	}
 }
